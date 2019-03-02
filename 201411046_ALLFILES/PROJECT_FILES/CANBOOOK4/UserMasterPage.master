@@ -1,0 +1,130 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="UserMasterPage.master.cs" Inherits="UserMasterPage" %>
+
+<!DOCTYPE html>
+<html>
+    <head>
+<title>CANKAYA FOOTBALL</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+     
+</head>
+<body>
+
+      
+
+      
+    <form id="form1" runat="server">
+    <div>
+    </div>
+     
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+
+            <div class="logo" ><img src="Logos/dop.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            
+         
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+   
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Profile Operations
+      </a>
+      <div class="dropdown-menu">
+        <asp:HyperLink cssclass="dropdown-item" ID="hypAddTeam" runat="server" NavigateUrl="~/MyProfile.aspx">My Profile</asp:HyperLink>
+          <asp:HyperLink cssclass="dropdown-item" ID="HyperLink17" runat="server" NavigateUrl="~/AddPost.aspx">Add Post</asp:HyperLink>
+        <asp:HyperLink cssclass="dropdown-item" ID="hypEditTeam" runat="server" NavigateUrl="~/UpdateInfo.aspx">Update Personal Information</asp:HyperLink>
+          <asp:HyperLink cssclass="dropdown-item" ID="HyperLink18" runat="server" NavigateUrl="~/Default.aspx">Commen Wall</asp:HyperLink>
+         
+      </div>
+    </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarReferee" data-toggle="dropdown">
+        Messeage Operations
+      </a>
+      <div class="dropdown-menu">
+           <asp:HyperLink cssclass="dropdown-item" ID="HyperLink2" runat="server" NavigateUrl="~/Messeage.aspx">Send Messeage</asp:HyperLink>
+        <asp:HyperLink cssclass="dropdown-item" ID="HyperLink1" runat="server" NavigateUrl="~/MesseageList.aspx">Messeage Box</asp:HyperLink>
+       
+        
+      </div>
+    </li>
+      
+      
+    </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="nevbarPerson" data-toggle="dropdown">
+        Friend Operations
+      </a>
+      <div class="dropdown-menu">
+       
+        <asp:HyperLink cssclass="dropdown-item" ID="HyperLink8" runat="server" NavigateUrl="~/RequestFriend.aspx">Confirm Friendship Request</asp:HyperLink>
+      
+            <asp:HyperLink cssclass="dropdown-item" ID="HyperLink11" runat="server" NavigateUrl="~/FriendList.aspx">List/Delete Friend</asp:HyperLink>
+  
+            <asp:HyperLink cssclass="dropdown-item" ID="HyperLink14" runat="server" NavigateUrl="~/SeeTrend.aspx"> See Trend Post</asp:HyperLink>
+          <asp:HyperLink cssclass="dropdown-item" ID="HyperLink15" runat="server" NavigateUrl="~/SendFriendship.aspx"> Send Friendship</asp:HyperLink>
+          <asp:HyperLink cssclass="dropdown-item" ID="HyperLink16" runat="server" NavigateUrl="~/SeeOtherProfile.aspx"> See Other Profile</asp:HyperLink>
+      </div>
+
+    </li>
+      <ul class="nav navbar-nav navbar-right">
+   
+      <li><a href="Home.aspx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <asp:Label ID="lblDeneme" runat="server" ForeColor="Red"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lblName" runat="server" ForeColor="Red"></asp:Label>
+          <span class="glyphicon glyphicon-
+                -in"></span> Log Out</a></li>
+    </ul>
+  </ul>
+</nav>
+<br>
+  
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            <p>
+                <br />
+            </p>
+            <p>
+            </p>
+            <p>
+            </p>
+            <p>
+            </p>
+        
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
+

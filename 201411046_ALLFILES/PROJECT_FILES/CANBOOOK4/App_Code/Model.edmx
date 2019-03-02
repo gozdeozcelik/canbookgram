@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BOOKGRAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentText" Type="nvarchar(max)" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="FriendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Friend1Id" Type="int" />
+          <Property Name="Friend2Id" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MessageList">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="senderUserId" Type="int" />
+          <Property Name="receiverUserId" Type="int" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="MessageDate" Type="smalldatetime" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="10" />
+          <Property Name="BirthDate" Type="smalldatetime" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Hide" Type="bit" Nullable="false" />
+          <Property Name="Imagepath" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Post_num" Type="int" />
+          <Property Name="Friend_num" Type="int" />
+          <Property Name="Message_num" Type="int" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostTypeId" Type="int" />
+          <Property Name="PostText" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="40" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Dislike_num" Type="int" />
+          <Property Name="Like_num" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="Comment_num" Type="int" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="PostTypeId" />
+          </Key>
+          <Property Name="PostTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostType" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Comment__PersonI__403A8C7D">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__PostId__3F466844">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend__Friend1I__4316F928">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend__Friend2I__440B1D61">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MessageLi__recei__47DBAE45">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="MessageList" Type="Self.MessageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="MessageList">
+              <PropertyRef Name="receiverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MessageLi__sende__46E78A0C">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="MessageList" Type="Self.MessageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="MessageList">
+              <PropertyRef Name="senderUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__PersonId__3C69FB99">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__PostTypeId__3B75D760">
+          <End Role="PostType" Type="Self.PostType" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="PostTypeId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="PostTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BOOKGRAMModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friend" EntityType="Self.Friend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageList" EntityType="Self.MessageList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostType" EntityType="Self.PostType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comment__PersonI__403A8C7D" Association="Self.FK__Comment__PersonI__403A8C7D">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__PostId__3F466844" Association="Self.FK__Comment__PostId__3F466844">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend__Friend1I__4316F928" Association="Self.FK__Friend__Friend1I__4316F928">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend__Friend2I__440B1D61" Association="Self.FK__Friend__Friend2I__440B1D61">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MessageLi__recei__47DBAE45" Association="Self.FK__MessageLi__recei__47DBAE45">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MessageList" EntitySet="MessageList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MessageLi__sende__46E78A0C" Association="Self.FK__MessageLi__sende__46E78A0C">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MessageList" EntitySet="MessageList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__PersonId__3C69FB99" Association="Self.FK__Post__PersonId__3C69FB99">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__PostTypeId__3B75D760" Association="Self.FK__Post__PostTypeId__3B75D760">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BOOKGRAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Comment__PersonI__403A8C7D" FromRole="Comment" ToRole="Person" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Comment__PostId__3F466844" FromRole="Comment" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="FriendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Friend1Id" Type="Int32" />
+          <Property Name="Friend2Id" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Friend__Friend1I__4316F928" FromRole="Friend" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="Self.FK__Friend__Friend2I__440B1D61" FromRole="Friend" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="MessageList">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="senderUserId" Type="Int32" />
+          <Property Name="receiverUserId" Type="Int32" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDate" Type="DateTime" Precision="0" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__MessageLi__recei__47DBAE45" FromRole="MessageList" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="Self.FK__MessageLi__sende__46E78A0C" FromRole="MessageList" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hide" Type="Boolean" Nullable="false" />
+          <Property Name="Imagepath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Post_num" Type="Int32" />
+          <Property Name="Friend_num" Type="Int32" />
+          <Property Name="Message_num" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__PersonI__403A8C7D" FromRole="Person" ToRole="Comment" />
+          <NavigationProperty Name="Friend" Relationship="Self.FK__Friend__Friend1I__4316F928" FromRole="Person" ToRole="Friend" />
+          <NavigationProperty Name="Friend1" Relationship="Self.FK__Friend__Friend2I__440B1D61" FromRole="Person" ToRole="Friend" />
+          <NavigationProperty Name="MessageList" Relationship="Self.FK__MessageLi__recei__47DBAE45" FromRole="Person" ToRole="MessageList" />
+          <NavigationProperty Name="MessageList1" Relationship="Self.FK__MessageLi__sende__46E78A0C" FromRole="Person" ToRole="MessageList" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Post__PersonId__3C69FB99" FromRole="Person" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostTypeId" Type="Int32" />
+          <Property Name="PostText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Dislike_num" Type="Int32" />
+          <Property Name="Like_num" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="Comment_num" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__PostId__3F466844" FromRole="Post" ToRole="Comment" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Post__PersonId__3C69FB99" FromRole="Post" ToRole="Person" />
+          <NavigationProperty Name="PostType" Relationship="Self.FK__Post__PostTypeId__3B75D760" FromRole="Post" ToRole="PostType" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="PostTypeId" />
+          </Key>
+          <Property Name="PostTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostType1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Post__PostTypeId__3B75D760" FromRole="PostType" ToRole="Post" />
+        </EntityType>
+        <Association Name="FK__Comment__PersonI__403A8C7D">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__PostId__3F466844">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend__Friend1I__4316F928">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend__Friend2I__440B1D61">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MessageLi__recei__47DBAE45">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="MessageList" Type="Self.MessageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="MessageList">
+              <PropertyRef Name="receiverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MessageLi__sende__46E78A0C">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="MessageList" Type="Self.MessageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="MessageList">
+              <PropertyRef Name="senderUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__PersonId__3C69FB99">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__PostTypeId__3B75D760">
+          <End Role="PostType" Type="Self.PostType" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="PostTypeId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="PostTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BOOKGRAMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Friend" EntityType="Self.Friend" />
+          <EntitySet Name="MessageList" EntityType="Self.MessageList" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="PostType" EntityType="Self.PostType" />
+          <AssociationSet Name="FK__Comment__PersonI__403A8C7D" Association="Self.FK__Comment__PersonI__403A8C7D">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__PostId__3F466844" Association="Self.FK__Comment__PostId__3F466844">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend__Friend1I__4316F928" Association="Self.FK__Friend__Friend1I__4316F928">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend__Friend2I__440B1D61" Association="Self.FK__Friend__Friend2I__440B1D61">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MessageLi__recei__47DBAE45" Association="Self.FK__MessageLi__recei__47DBAE45">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MessageList" EntitySet="MessageList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MessageLi__sende__46E78A0C" Association="Self.FK__MessageLi__sende__46E78A0C">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MessageList" EntitySet="MessageList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__PersonId__3C69FB99" Association="Self.FK__Post__PersonId__3C69FB99">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__PostTypeId__3B75D760" Association="Self.FK__Post__PostTypeId__3B75D760">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BOOKGRAMModelStoreContainer" CdmEntityContainer="BOOKGRAMEntities">
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friend">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.Friend">
+              <MappingFragment StoreEntitySet="Friend">
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="Friend1Id" ColumnName="Friend1Id" />
+                <ScalarProperty Name="Friend2Id" ColumnName="Friend2Id" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageList">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.MessageList">
+              <MappingFragment StoreEntitySet="MessageList">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="senderUserId" ColumnName="senderUserId" />
+                <ScalarProperty Name="receiverUserId" ColumnName="receiverUserId" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Imagepath" ColumnName="Imagepath" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Post_num" ColumnName="Post_num" />
+                <ScalarProperty Name="Friend_num" ColumnName="Friend_num" />
+                <ScalarProperty Name="Message_num" ColumnName="Message_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="PostTypeId" ColumnName="PostTypeId" />
+                <ScalarProperty Name="PostText" ColumnName="PostText" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Dislike_num" ColumnName="Dislike_num" />
+                <ScalarProperty Name="Like_num" ColumnName="Like_num" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Comment_num" ColumnName="Comment_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostType">
+            <EntityTypeMapping TypeName="BOOKGRAMModel.PostType">
+              <MappingFragment StoreEntitySet="PostType">
+                <ScalarProperty Name="PostTypeId" ColumnName="PostTypeId" />
+                <ScalarProperty Name="PostType1" ColumnName="PostType" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
